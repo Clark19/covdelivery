@@ -10,9 +10,12 @@ services:
 
 script:
   - echo "Hello, World"
+  - pwd
+  - ls -al
 
 after_success:
-  - docker build -t clarkgable1/covdelivery-db ./db
+  # - docker build -t clarkgable1/covdelivery-db ./db
+  - docker build -f DBDockerfile -t clarkgable1/covdelivery-db .
   - docker build -t clarkgable1/covdelivery-back ./back
   - docker build -t clarkgable1/covdelivery-front ./front
   - docker build -t clarkgable1/covdelivery-nginx ./nginx

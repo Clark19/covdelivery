@@ -1,0 +1,38 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+# before_install:
+#   - docker build -t clarkgable1/react-test-app -f ./front/Dockerfile.dev ./front
+
+script:
+  - echo "Hello, World"
+
+after_success:
+  - docker build -t clarkgable1/covdelivery-db ./db
+  - docker build -t clarkgable1/covdelivery-back ./back
+  - docker build -t clarkgable1/covdelivery-front ./front
+  - docker build -t clarkgable1/covdelivery-nginx ./nginx
+
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push clarkgable1/covdelivery-db
+  - docker push clarkgable1/covdelivery-back
+  - docker push clarkgable1/covdelivery-front
+  - docker push clarkgable1/covdelivery-nginx
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "ap-northeast-2"
+#   app: "covdelivery-app"
+#   env: "covdelivery-env"
+#   bucket_name: elasticbeanstalk-ap-northeast-2-101822638924
+#   bucket_path: "covdelivery-app"
+#   on:
+#     branch: master
+  
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_ACCESS_KEY

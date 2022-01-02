@@ -8,4 +8,5 @@ LOAD DATA INFILE './seoul_delivery_count_with_patient.csv' INTO TABLE patientdel
 
 LOAD DATA INFILE './food_weather.csv' INTO TABLE foodhour FIELDS TERMINATED BY ',' (date, day, hour, food, count, weather);
 
-LOAD DATA INFILE './yogiyo_delivery_in_seoul.csv' INTO TABLE yogiyostore FIELDS TERMINATED BY ',' (name, categories, review_avg, lat, lng, phone, address);
+-- 문제있는 파일로 인한 데이터 삽입 오류로 임시 주석처리
+-- LOAD DATA INFILE './yogiyo_delivery_in_seoul.csv' INTO TABLE yogiyostore FIELDS TERMINATED BY ',' (name, categories, review_avg, lat, lng, phone, address);
